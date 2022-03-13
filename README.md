@@ -10,11 +10,11 @@ Avalonia discussion on Glitter: https://gitter.im/AvaloniaUI
 
 2) Download Avalonia package:
 
-For VS2022 - [link](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaVS).
+  For VS2022 - [link](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaVS).
 
-For VS2017/2019 - [link](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaforVisualStudio).
+  For VS2017/2019 - [link](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaforVisualStudio).
 
-For Rider - [link](https://docs.avaloniaui.net/docs/getting-started/ide-support/jetbrains-rider-setup).
+  For Rider - [link](https://docs.avaloniaui.net/docs/getting-started/ide-support/jetbrains-rider-setup).
 
 3) Install additional NuGet packages: DotNet.Bundle, MessageBox.Avalonia.
 

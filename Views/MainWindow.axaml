@@ -1,0 +1,125 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:YouTube_Video_Uploader__cross_platform_.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:youTubeApi="clr-namespace:YouTube_Video_Uploader__cross_platform_.YouTube_API"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
+        x:Class="YouTube_Video_Uploader__cross_platform_.Views.MainWindow"
+        Background="{x:Null}"
+        CanResize="False"
+        Height="800" Width="800"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ClipToBounds="True"
+        ExtendClientAreaToDecorationsHint="True"
+        TransparencyLevelHint="Transparent"
+        TransparencyBackgroundFallback="Transparent"
+        ShowInTaskbar="False"
+        SystemDecorations ="None"
+
+        WindowStartupLocation="CenterScreen">
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	<Border Background="White" CornerRadius="20"  ClipToBounds="True">
+		<Grid>
+            <Border Name="TitleBar" x:Name="TitleBar" Background="#FD0012"  CornerRadius="20,20,0,0"
+                    Margin="0,0,0,745">
+				<StackPanel HorizontalAlignment="Left"  Orientation="Horizontal" Margin="714,0,0,0" Width="88" Height="55" VerticalAlignment="Center">
+					<Button   Click="Btn_minimize_OnClick" CornerRadius="6" Name="btn_minimize" Width="40" Height="40" Background="Transparent" FontSize="26" Content="🗕" BorderThickness="0" Foreground="White" FontWeight="Bold">
+                    </Button>
+					<Button Click="Btn_close_OnClick" Name="btn_close" Width="40" Height="40" Background="Transparent" FontSize="26" Content="✕" BorderThickness="0"  Foreground="White" FontWeight="Bold">
+                    </Button>
+				</StackPanel>
+			</Border>
+			<TextBlock FontSize="30"  Foreground="White" Text="YouTube Video Uploader" FontFamily="YouTube Sans" FontWeight="Medium" Margin="0,0,0,754" Height="37" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="298"/>
+			<Grid> 
+                <Button Background="#EA0010" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="White" FontFamily="YouTube Sans" FontSize="14" FontWeight="Medium" Content="Choose folder:" Margin="19,75,0,0" Click="Button_OnClick"/>
+                <ComboBox x:Name="cb_videos" Width="646" Height="36" Margin="134,72,20,0" BorderBrush="Gray" Foreground="Gray" FontFamily="YouTube Sans" FontWeight="Medium" VerticalAlignment="Top" FontSize="20"/>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="Gray"  FontFamily="YouTube Sans" FontSize="30" FontWeight="Medium" Text="Title:" Margin="19,120,0,0" Width="61"/>
+				<TextBox Watermark="Video title" FontSize="18" x:Name="tb_title" Width="758" Height="36" Margin="22,170,20,0" FontFamily="YouTube Sans" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBox.Styles>
+                        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                           <Setter Property="BorderBrush" Value="#EA0010"></Setter>
+						</Style>
+                    </TextBox.Styles>
+                </TextBox>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="Gray"  FontFamily="YouTube Sans" FontSize="30" FontWeight="Medium" Margin="19,220,0,0" Width="220" Text="Description:"/>
+				<TextBox Watermark="Your description"  x:Name="tb_description" Margin="22,276,20,0" AcceptsReturn="True" TextWrapping="Wrap" FontFamily="YouTube Sans" FontSize="20" FontWeight="Medium" BorderBrush="Gray" Foreground="Gray" Height="110" HorizontalAlignment="Left" VerticalAlignment="Top" Width="758">
+                    <TextBox.Styles>
+                        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                            <Setter Property="BorderBrush" Value="#EA0010"></Setter>
+                        </Style>
+                    </TextBox.Styles>
+				</TextBox>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="Gray"  FontFamily="YouTube Sans" FontSize="30" FontWeight="Medium" Margin="19,400,0,0" Width="220" Text="Tags:"/>
+				<TextBox Watermark="Tag1, Tag2, Tag3" HorizontalAlignment="Left"  Width="758" Height="36"  VerticalAlignment="Top" x:Name="tb_tags"  FontFamily="YouTube Sans" FontSize="18" FontWeight="Medium" Margin="22,456,21,275"  BorderBrush="Gray" Foreground="Gray">
+                    <TextBox.Styles>
+                        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                            <Setter Property="BorderBrush" Value="#EA0010"></Setter>
+                        </Style>
+                    </TextBox.Styles>
+				</TextBox>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="Gray"  FontFamily="YouTube Sans" FontSize="30" FontWeight="Medium" Text="Thumbnail (1280x720 or bigger):" Margin="19,506,0,0" Width="520"/>
+				<CheckBox Name="ch_nothumbnail" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="110" Height="36" Margin="22,554,0,0" Checked="Ch_nothumbnail_OnChecked" Unchecked="Ch_nothumbnail_OnUnchecked">
+                    <Label Width="91" Height="28" Foreground="Gray" FontFamily="YouTube Sans" FontSize="14" >No Thumbnail</Label>
+					<CheckBox.Styles>
+                        <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
+                            <Setter Property="Background" Value="#EA0010"/>
+                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                        </Style>
+					</CheckBox.Styles>
+                </CheckBox>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Gray"  FontFamily="YouTube Sans" FontSize="22" FontWeight="Medium" Text="OR" Margin="150,556,0,0" Width="26"/>
+				<Button
+                    CornerRadius="6"
+                    x:Name="btn_chooseimage"
+                    Background="#EA0010"
+                    BorderThickness="0"
+                    Content="Choose Image"
+                    Foreground="White"
+                    FontSize="14"
+                    FontFamily="YouTube Sans" FontWeight="Medium"
+                    Margin="205,522,480,182" Click="Btn_chooseimage_OnClick">
+                </Button>
+				<TextBox Watermark="Image path" IsReadOnly="True" Width="444" Height="30" Margin="330,522,20,182" FontSize="14" x:Name="tb_image_path" Foreground="Gray" FontFamily="YouTube Sans" FontWeight="Medium">
+                    <TextBox.Styles>
+                        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                            <Setter Property="BorderBrush" Value="#EA0010"></Setter>
+                        </Style>
+                    </TextBox.Styles>
+				</TextBox>
+                <TextBlock HorizontalAlignment="Left" Text="Categories:" VerticalAlignment="Top"  Foreground="Gray"  FontFamily="YouTube Sans" FontSize="30" FontWeight="Medium" Margin="19,594,0,0" Width="180"/>
+                <ComboBox x:Name="cb_categories" Width="298"  Height="36" Margin="22,640,480,0" BorderBrush="Gray" Foreground="Gray" FontFamily="YouTube Sans" FontWeight="Medium" VerticalAlignment="Top" FontSize="20"/>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="Gray"  FontFamily="YouTube Sans" FontSize="30" FontWeight="Medium" Margin="480,594,0,0" Width="180" Text="Privacies:"/>
+				<ComboBox x:Name="cb_privacies" Width="298" Height="36" Margin="480,640,20,0" BorderBrush="Gray" Foreground="Gray" FontFamily="YouTube Sans" FontWeight="Medium" VerticalAlignment="Top" FontSize="20"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="Gray"  FontFamily="YouTube Sans" FontSize="30" FontWeight="Medium" Margin="20,690,0,0" Width="180" Text="Channel link:"/>
+				<TextBox Watermark="Paste here your channel link" Height="30" Width="634" x:Name="tb_channellink" FontFamily="YouTube Sans" FontSize="15" FontWeight="Medium" Margin="40,730,160,15" BorderBrush="Gray" Foreground="Gray">
+                    <TextBox.Styles>
+                        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                            <Setter Property="BorderBrush" Value="#EA0010"></Setter>
+                        </Style>
+                    </TextBox.Styles>
+				</TextBox>
+				<Button
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Width="100"
+                    Height="35"
+                    CornerRadius="6"
+                    x:Name="btn_upload"
+                    Background="#EA0010"
+                    BorderThickness="0"
+                    Content="UPLOAD"
+                    Foreground="White"
+                    FontSize="14"
+                    FontFamily="YouTube Sans" FontWeight="Medium"
+                    Margin="678,738,21,24" Click="Btn_upload_OnClick">
+                </Button>
+            </Grid>
+		</Grid> 
+    </Border>
+   
+
+</Window>

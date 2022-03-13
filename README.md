@@ -23,3 +23,8 @@ PM:
 Install-Package MessageBox.Avalonia -Version 1.7.1
 Install-Package Dotnet.Bundle -Version 0.9.13
 ```
+
+![image](https://user-images.githubusercontent.com/79169736/158053166-e738043f-6d1d-4ea5-9a65-cdca382f0780.png)
+
+![image](https://user-images.githubusercontent.com/79169736/158053220-91ac6b73-6927-4dfc-846b-9d2c58fb1c3c.png)
+
